@@ -116,6 +116,7 @@ class Group:
 
     def command_0arg(self, msg):
         # webqq接受的消息会以空格结尾
+        print msg
         match = re.match(r'^(?:!|！)([^\s\{\}]+)\s*$', msg.content)
         if match:
             command = str(match.group(1))
@@ -149,9 +150,9 @@ class Group:
         self.reply(result)
 
     def callout(self, msg):
-        if "智障机器人" in msg.content:
+        if "maki" in msg.content or "真姬" in msg.content:
             logging.info(str(self.gid) + " calling me out, trying to reply....")
-            self.reply("干嘛（‘·д·）")
+            self.reply("纳尼所类，一米瓦干奶")
             return True
         return False
 
@@ -175,14 +176,14 @@ class Group:
                     self.tucao_dict[key].append(value)
                 else:
                     self.tucao_dict[key] = [value]
-                self.reply("学习成功！快对我说" + str(key) + "试试吧！")
+                self.reply("现在你对我说" + str(key) + "试试也不是不可以哦")
                 self.tucao_save()
                 return True
 
             elif command == 'delete':
                 if key in self.tucao_dict and self.tucao_dict[key].count(value):
                     self.tucao_dict[key].remove(value)
-                    self.reply("呜呜呜我再也不说" + str(value) + "了")
+                    self.reply("其实我也并不想听你说" + str(key) + "")
                     self.tucao_save()
                     return True
         else:
